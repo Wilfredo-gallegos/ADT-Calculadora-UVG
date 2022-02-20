@@ -138,4 +138,63 @@ public class operaciones implements Calculadora {
 		System.out.println(a.peek());
 		return 0;	
 	}
+	
+/**while(a.empty() == false) {
+	int valor1 = Integer.parseInt((String) a.pop());
+	int valor2 = Integer.parseInt((String) a.pop());
+	if("+".equals((String) a.peek())||"*".equals((String) a.peek())||"-".equals((String) a.peek())||"/".equals((String) a.peek())) {
+		String operacion = (String) a.pop();
+
+		if("+".equals(operacion)) {
+			int suma = sumar(valor1,valor2);
+			a.push(suma);
+		}else if("-".equals(operacion)) {
+				int resta = restar(valor1,valor2);
+				a.push(resta);
+		}else if("*".equals(operacion)) {
+			int multiplicacion = multiplicar(valor1,valor2);
+			a.push(multiplicacion);
+		}else if("/".equals(operacion)) {
+			int division = dividir(valor1,valor2);
+			a.push(division);
+		}
+	}else {
+		
+	}**/
+
+/**int valor1= 0;
+int valor2 = 0;
+if(a.size()<3){
+	valor1 = Integer.parseInt((String) a.pop());
+	valor2 = Integer.parseInt((String) a.pop());
+	if("+".equals((String) a.pop())) {
+		int suma = sumar(valor1,valor2);
+		a.push(suma);
+	}else if("-".equals((String) a.pop())) {
+			int resta = restar(valor1,valor2);
+			a.push(resta);
+	}else if("*".equals((String) a.pop())) {
+		int multiplicacion = multiplicar(valor1,valor2);
+		a.push(multiplicacion);
+	}else if("/".equals((String) a.pop())) {
+		int division = dividir(valor1,valor2);
+		a.push(division);
+	}
+}else
+	if(a.size()>=3) {
+		while(a.empty()==false) {
+			valor1 = Integer.parseInt((String) a.pop());
+			valor2 = Integer.parseInt((String) a.pop());
+			try {
+				int valor3 = Integer.parseInt((String) a.peek());
+				valor1 = valor2;
+				valor2 = valor3;
+				return 0;
+			}catch(Exception e){
+				
+			}
+			
+		}
+	}**/
+
 }
