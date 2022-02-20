@@ -1,0 +1,43 @@
+import java.util.ArrayList;
+
+public class Vector<E> implements Stack<E> {
+
+	protected ArrayList<E> elementos;
+
+	public Vector(){
+		elementos = new ArrayList<E>();
+	}
+	
+	@Override
+	public void push(E newEntry) {
+		// TODO Auto-generated method stub
+		elementos.add(newEntry);
+	}
+
+	@Override
+	public E pop() {
+		// TODO Auto-generated method stub
+		
+		return elementos.remove(size()-1);
+	}
+
+	@Override
+	public E peek() {
+		// TODO Auto-generated method stub
+		
+		return elementos.get(size()-1);
+	}
+
+	@Override
+	public boolean empty() {
+		// TODO Auto-generated method stub
+		return size()==1;
+	}
+
+	@Override
+	public int size() {
+		// TODO Auto-generated method stub
+		return elementos.size();
+	}
+	
+}
