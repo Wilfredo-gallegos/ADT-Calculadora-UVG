@@ -1,0 +1,141 @@
+import java.io.BufferedReader;
+import java.io.File;
+import java.io.FileNotFoundException;
+import java.io.FileReader;
+/**
+ * @author Wilfredo Gallegos
+ * 20399
+ * @version 19/02/2022
+ * Clase operacional que implementa la calculadora
+ * 
+**/
+public class operaciones implements Calculadora {
+
+	/**
+	 * 
+	 * @param x
+	 * @return String
+	 */
+	public String leer_archivo(String x) {
+		File archivo = new File(x);
+		BufferedReader obj=null;
+		try {
+			obj = new BufferedReader(new FileReader(archivo));
+		} catch (FileNotFoundException e1) {
+			// TODO Auto-generated catch block
+			System.out.println("La ruta no se puede leer");;
+		}
+		String operaciones = "";
+		try {
+			operaciones= obj.readLine();
+		} catch (Exception e) {
+		      System.out.println("No tiene datos el archivo");
+	    } 
+		return operaciones;
+		
+	}
+	/**
+	 * @param a
+	 * @param b
+	 * @return suma
+	 */
+	@Override
+	public int sumar(int a, int b) {
+		// TODO Auto-generated method stub
+		int suma = a + b;
+		return suma;
+	}
+
+	@Override
+	public int restar(int a, int b) {
+		// TODO Auto-generated method stub
+		int resta = a - b;
+		return resta;
+	}
+
+	@Override
+	public int dividir(int a, int b) {
+		// TODO Auto-generated method stub
+		int division=a/b;
+		return division;
+	}
+
+	@Override
+	public int multiplicar(int a, int b) {
+		// TODO Auto-generated method stub
+		int multiplicacion = a*b;
+		return multiplicacion;
+	}
+
+	public int apilar(String[] a) {
+		int valor = 0;
+		for(int i=0; i <= (a.length-1); i++) {
+			System.out.println(a[i]);	}
+		
+		
+		Stack<String> stack = new Vector<>();
+		stack.push(a[0]);
+		while(stack.empty()==false) {
+			for(int i=1;i<a.length;i++ ) {
+				stack.push(a[i]);
+				try {
+					Integer.parseInt(stack.peek());
+				}catch(Exception e){
+					valor = decifrar(stack);
+				}
+			}
+		}
+
+		return valor;
+	}
+	
+	@Override
+	public int decifrar(Stack a) {
+		// TODO Auto-generated method stub
+		//String operacion = (String) a.pop();
+		//for (int i=a.size()-1; i>=0; i-- ) {
+		//System.out.println(a.pop());
+		while(a.empty()==false) {
+			int valor1 = Integer.parseInt((String) a.pop());
+			int valor2 = Integer.parseInt((String) a.pop());
+			if("+".equals((String) a.peek())||"*".equals((String) a.peek())||"-".equals((String) a.peek())||"/".equals((String) a.peek())) {
+				String operacion = (String) a.pop();
+				if("+".equals(operacion)) {
+					int suma = sumar(valor1,valor2);
+					a.push(String.valueOf(suma));
+				}else if("-".equals(operacion)) {
+					int resta = restar(valor1,valor2);
+					a.push(String.valueOf(resta));
+				}else if("*".equals(operacion)) {
+					int multiplicacion = multiplicar(valor1,valor2);
+					a.push(String.valueOf(multiplicacion));
+				}else if("/".equals(operacion)) {
+					int division = dividir(valor1,valor2);
+					a.push(String.valueOf(division));
+				}
+			}else {
+				int valor3 = Integer.parseInt((String) a.pop());
+				String operacion = (String) a.pop();
+				if("+".equals(operacion)) {
+					int suma = sumar(valor3,valor2);
+					a.push(String.valueOf(suma));
+					a.push(String.valueOf(valor1));
+				}else if("-".equals(operacion)) {
+					int resta = restar(valor3,valor2);
+					a.push(String.valueOf(resta));
+					a.push(String.valueOf(valor1));
+				}else if("*".equals(operacion)) {
+					int multiplicacion = multiplicar(valor3,valor2);
+					a.push(String.valueOf(multiplicacion));
+					a.push(String.valueOf(valor1));
+				}else if("/".equals(operacion)) {
+					int division = dividir(valor3,valor2);
+					a.push(String.valueOf(division));
+					a.push(String.valueOf(valor1));
+				}
+			}
+		}
+		System.out.println(a.peek());
+		return 0;	
+	}
+}
